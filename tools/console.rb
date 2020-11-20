@@ -18,9 +18,10 @@ poor_dude = VentureCapitalist.new("john", 10)
 
 g = FundingRound.new("g", "a", "seed", -2)
 b = FundingRound.new("b", "c", "Round A", 10000)
-v = FundingRound.new
-viva.pivot("www.posey.com","posey")
 
+
+viva.pivot("www.posey.com","posey")
+viva.sign_contract("chuck", "seed", 50000)
 viva.find_by_founder("Hunter")
 
 binding.pry

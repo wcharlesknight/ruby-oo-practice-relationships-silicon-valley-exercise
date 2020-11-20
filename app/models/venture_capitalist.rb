@@ -21,5 +21,4 @@ class VentureCapitalist
     def self.tres_commas_club
         @@billionaires 
     end
-
 end
