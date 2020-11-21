@@ -1,6 +1,6 @@
 class Startup
     attr_reader :name, :founder
-    attr_accessor :domain, :num_funding_rounds, :total_investment
+    attr_accessor :domain, :num_funding_rounds, :total_investment, :investors
 
     @@all = []
     def initialize(name, founder, domain)
@@ -10,6 +10,7 @@ class Startup
         @@all << self
         @num_funding_rounds = 1
         @total_investment = 0
+        @investors = investors
     end 
 
     def pivot(new_domain, new_name)
@@ -33,8 +34,12 @@ class Startup
        self.total_investment += investment
     end
 
+    def funding_rounds
+        FundingRound.all.select {|x| x.startup == self}
+    end
+
     def num_funding_rounds
-        @num_funding_rounds
+       self.funding_rounds.count
     end
 
     def total_funds
@@ -42,7 +47,11 @@ class Startup
     end
 
     def investors
+        self.funding_rounds.map {|startups| startups.venture_capitalist}.uniq
+    end
 
+    def big_investors
+        self.investors.select {|x| VentureCapitalist.tres_commas_club.include?(x)}
     end
 
     def self.all
